@@ -22,20 +22,36 @@ lib/client.js       Client：编辑按钮 + 原位编辑器（免构建 __Module
 
 ## 安装
 
-在 desktop profile 中加入本插件（二选一）：
+### 方式一：dsh 插件命令（推荐）
 
-```powershell
-# 方式一：dsh 插件命令
-dsh plugin --profile desktop add D:\code\dsh\plugins\dsh-editor-plugin
-
-# 方式二：手动
-#   1. 在 C:\Users\sea\.dsh\profiles\desktop\package.json 的 dependencies 加
-#      "dsh-editor-plugin": "link:D:/code/dsh/plugins/dsh-editor-plugin"
-#      并在 dsh.profile.bundles 数组加 "dsh-editor-plugin"
-#   2. 在该 profile 目录执行 pnpm install（生成 node_modules 链接）
+```bash
+git clone https://github.com/lihaiyang/dsh-editor-plugin.git
+dsh plugin --profile <你的profile名> add <克隆目录>/dsh-editor-plugin
 ```
 
-然后重启 `dsh --profile desktop`（或 DeepSeek Harness 桌面端），刷新 GUI。
+例如 profile 名为 `desktop`、克隆到当前目录时：
+
+```bash
+dsh plugin --profile desktop add ./dsh-editor-plugin
+```
+
+### 方式二：手动接入 profile
+
+```bash
+git clone https://github.com/lihaiyang/dsh-editor-plugin.git
+cd dsh-editor-plugin
+dsh plugin --profile <你的profile名> add "$PWD"
+```
+
+手动方式等价于：把本目录作为 `link:` 依赖登记进 profile 的 `package.json`，并把 `dsh-editor-plugin` 加入其 `dsh.profile.bundles` 数组，然后在该 profile 目录执行 `pnpm install`。
+
+### 生效
+
+重启对应的 dsh profile（例如 `dsh --profile desktop`，或重新打开 DeepSeek Harness 桌面端），刷新 GUI。
+
+## 使用
+
+在侧边栏打开任意文本文件（如 `.md`）→ 预览工具栏末尾出现铅笔按钮 → 点击即原位编辑。
 
 ## 限制
 
