@@ -1,0 +1,12 @@
+# dsh-editor-plugin —— profile patch 层
+#
+# 本文件随插件包发布，并作为 dsh profile bundle 的补丁层被加载：
+# 每次 compose 时这一层都在 dsh-base / dsh-web-app 等内置层之后应用。
+#
+# 一个 insert 行注册 Host 半边（lib/index.js：/dsh-editor/file 读写路由）。
+# Client 半边（lib/client.js：侧边栏「编辑」按钮 + 原位编辑器）由
+# package.json 的 dsh.client 声明被 client-modules 自动装载，无需在此登记。
+
+- insert:
+    - id: dsh-editor
+      name: dsh-editor-plugin
